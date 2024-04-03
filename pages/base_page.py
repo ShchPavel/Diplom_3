@@ -3,6 +3,7 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 import selenium
 
+
 class BasePage:
     """ Класс, описывающий взаимодействия с элементами. """
 
@@ -10,7 +11,6 @@ class BasePage:
         self.driver = driver
 
     def wait_and_find_element(self, locator):
-        WebDriverWait(self.driver, 10).until(expected_conditions.presence_of_element_located(locator))
         WebDriverWait(self.driver, 10).until(expected_conditions.visibility_of_element_located(locator))
         element = self.driver.find_element(*locator)
         ActionChains(self.driver).move_to_element(element).perform()
