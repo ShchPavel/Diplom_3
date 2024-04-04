@@ -27,3 +27,8 @@ class BasePage:
 
     def open_page(self, url):
         self.driver.get(url)
+
+    def drag_n_drop(self, drag_and_drop_script, element, target_element):
+        element = self.driver.find_element(*element)
+        target_element = self.driver.find_element(*target_element)
+        self.driver.execute_script(drag_and_drop_script, element, target_element)
