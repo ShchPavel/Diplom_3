@@ -9,14 +9,14 @@ from data import Urls
 
 
 class TestPersonalCabinet:
-    def test_personal_cabinet_button_redirect_correct(self, driver_temp_user_logged_in):
-        driver = driver_temp_user_logged_in
+    def test_personal_cabinet_button_redirect_correct(self, temp_user_logged_in__return_driver):
+        driver = temp_user_logged_in__return_driver
         page = MainPage(driver)
         page.go_to_personal_cabinet()
         assert driver.current_url == Urls.PROFILE_URL
 
-    def test_personal_cabinet_order_history_button_redirect_correct(self, driver_temp_user_logged_in):
-        driver = driver_temp_user_logged_in
+    def test_personal_cabinet_order_history_button_redirect_correct(self, temp_user_logged_in__return_driver):
+        driver = temp_user_logged_in__return_driver
         page = MainPage(driver)
         page.go_to_personal_cabinet()
 
@@ -24,8 +24,8 @@ class TestPersonalCabinet:
         page.go_to_order_history_page()
         assert driver.current_url == Urls.PROFILE_ORDER_HISTORY_URL
 
-    def test_logout_success(self, driver_temp_user_logged_in):
-        driver = driver_temp_user_logged_in
+    def test_logout_success(self, temp_user_logged_in__return_driver):
+        driver = temp_user_logged_in__return_driver
         page = MainPage(driver)
         page.go_to_personal_cabinet()
 

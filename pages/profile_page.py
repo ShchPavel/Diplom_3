@@ -11,3 +11,12 @@ class ProfilePage(BasePage):
         self.click_on_element(ProfileLocators.BUTTON_PROFILE_LOGOUT)
         self.wait_and_find_element(LoginPageLocators.BUTTON_RESET_PASSWORD)
 
+    def open_order_history(self):
+        self.click_on_element(ProfileLocators.BUTTON_PROFILE_ORDERS_HISTORY)
+
+    def is_order_exist_in_history(self, locator):
+        self.has_element_in_list(locator, ProfileLocators.LIST_OF_MY_ORDERS)
+
+
+
+

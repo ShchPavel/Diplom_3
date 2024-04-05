@@ -4,6 +4,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 import selenium
 
 
+
 class BasePage:
     """ Класс, описывающий взаимодействия с элементами. """
 
@@ -32,3 +33,10 @@ class BasePage:
         element = self.driver.find_element(*element)
         target_element = self.driver.find_element(*target_element)
         self.driver.execute_script(drag_and_drop_script, element, target_element)
+
+    def has_element_in_list(self, locator, ul_list):
+        print(ul_list)
+        for element in ul_list:
+            el = WebDriverWait(self.driver, 10).until(expected_conditions.presence_of_element_located(*locator))
+            return el
+

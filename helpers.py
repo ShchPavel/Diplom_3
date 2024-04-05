@@ -4,7 +4,7 @@ import string
 import requests
 from selenium import webdriver
 
-from data import Urls
+from data import Urls, Ingredient
 
 
 class WebDriverFactory:
@@ -53,6 +53,16 @@ class DeleteUser:
         bearer_token = f'Bearer {token}'
         headers = {"Authorization": bearer_token}
         response = requests.delete(Urls.API_USER_BASIC, headers=headers)
+        return response
+
+
+class CreateOrder:
+    @staticmethod
+    def create_order(token):
+        bearer_token = f'Bearer {token}'
+        headers = {"Authorization": bearer_token}
+        payload = {"ingredients": Ingredient.KNOWN_INGREDIENT}
+        response = requests.post(Urls.API_CREATE_ORDER, headers=headers, data=payload)
         return response
 
 

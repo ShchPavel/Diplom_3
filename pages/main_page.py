@@ -30,3 +30,5 @@ class MainPage(BasePage):
     def make_order(self):
         self.click_on_element(MainPageLocators.BUTTON_MAKE_ORDER)
         self.wait_and_find_element(MainPageLocators.POPUP_ORDER_REGISTERED)
+
+

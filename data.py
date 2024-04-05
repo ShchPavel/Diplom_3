@@ -9,3 +9,8 @@ class Urls:
 
     API_REGISTER_USER = BASE_URL + 'api/auth/register'
     API_USER_BASIC = BASE_URL + 'api/auth/user'
+    API_CREATE_ORDER = BASE_URL + 'api/orders'
+
+
+class Ingredient:
+    KNOWN_INGREDIENT = '61c0c5a71d1f82001bdaaa6d'
