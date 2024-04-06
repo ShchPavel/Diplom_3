@@ -14,9 +14,15 @@ class ProfilePage(BasePage):
     def open_order_history(self):
         self.click_on_element(ProfileLocators.BUTTON_PROFILE_ORDERS_HISTORY)
 
-    def is_order_exist_in_history(self, locator):
-        self.has_element_in_list(locator, ProfileLocators.LIST_OF_MY_ORDERS)
+    def get_all_my_orders(self):
+        return self.get_orders(ProfileLocators.LIST_OF_MY_ORDERS)
 
+    def is_order_on_my_history_orders(self, order_locator, history_orders):
+        link = None
+        for _ in history_orders:
+            link = self.wait_and_find_element(order_locator)
 
-
-
+        if link is not None:
+            return True
+        else:
+            return False

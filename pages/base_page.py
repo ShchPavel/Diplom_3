@@ -1,8 +1,6 @@
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
-import selenium
-
 
 
 class BasePage:
@@ -12,7 +10,7 @@ class BasePage:
         self.driver = driver
 
     def wait_and_find_element(self, locator):
-        WebDriverWait(self.driver, 10).until(expected_conditions.visibility_of_element_located(locator))
+        WebDriverWait(self.driver, 30).until(expected_conditions.visibility_of_element_located(locator))
         element = self.driver.find_element(*locator)
         ActionChains(self.driver).move_to_element(element).perform()
         return element
@@ -34,9 +32,10 @@ class BasePage:
         target_element = self.driver.find_element(*target_element)
         self.driver.execute_script(drag_and_drop_script, element, target_element)
 
-    def has_element_in_list(self, locator, ul_list):
-        print(ul_list)
-        for element in ul_list:
-            el = WebDriverWait(self.driver, 10).until(expected_conditions.presence_of_element_located(*locator))
-            return el
+    def get_orders(self, locator):
+        return self.driver.find_elements(*locator)
 
+    def get_element_value(self, locator):
+        self.wait_and_find_element(locator)
+        value = self.driver.find_element(*locator).text
+        return value
