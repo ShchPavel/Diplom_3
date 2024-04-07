@@ -51,3 +51,6 @@ class BasePage:
 
     def get_element_value(self, locator):
         return self.driver.find_element(*locator).text.strip()
+
+    def refresh_page(self):
+        self.driver.refresh()

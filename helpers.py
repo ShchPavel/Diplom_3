@@ -6,7 +6,6 @@ from selenium import webdriver
 from data import Urls, Ingredient
 
 
-
 class WebDriverFactory:
     @staticmethod
     def get_web_driver(browser_name):

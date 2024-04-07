@@ -61,3 +61,7 @@ class FeedPage(BasePage):
             return True
         else:
             return False
+
+    @allure.step('Рефрешим страницу')
+    def refresh_feed_page(self):
+        self.refresh_page()
