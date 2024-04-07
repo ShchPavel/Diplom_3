@@ -1,10 +1,9 @@
-from locators.common_locators import CommonLocators
 from pages.base_page import BasePage
 from data import Urls
 from locators.login_page_locators import LoginPageLocators
 from locators.forgot_password_page_locators import ForgotPasswordPageLocators
 from locators.main_page_locators import MainPageLocators
-
+import allure
 
 class LoginPage(BasePage):
 

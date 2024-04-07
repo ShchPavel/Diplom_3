@@ -1,13 +1,13 @@
 from locators.common_locators import CommonLocators
 from locators.main_page_locators import MainPageLocators
-from locators.profile_locators import ProfileLocators
+from locators.profile_page_locators import ProfilePageLocators
 from pages.base_page import BasePage
-
+import allure
 
 class MainPage(BasePage):
     def go_to_personal_cabinet(self):
         self.click_on_element(CommonLocators.HEADER_PERSONAL_CABINET)
-        self.wait_and_find_element(ProfileLocators.BUTTON_PROFILE_ORDERS_HISTORY)
+        self.wait_and_find_element(ProfilePageLocators.BUTTON_PROFILE_ORDERS_HISTORY)
 
     def go_to_constructor(self):
         self.click_on_element(CommonLocators.HEADER_CONSTRUCTOR)

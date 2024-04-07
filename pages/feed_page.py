@@ -1,8 +1,7 @@
-import time
-
 from locators.feed_page_locators import FeedPageLocators
 from pages.base_page import BasePage
-from locators.profile_locators import ProfileLocators
+import allure
+
 
 class FeedPage(BasePage):
 

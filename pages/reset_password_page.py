@@ -1,8 +1,7 @@
 from pages.base_page import BasePage
 from locators.reset_password_page_locators import ResetPasswordPageLocators
-from data import Urls
 from helpers import DataGenerator
-
+import allure
 
 class ResetPasswordPage(BasePage):
     def fill_password_by_random_text_and_return_text(self):

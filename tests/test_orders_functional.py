@@ -7,7 +7,7 @@ from locators.feed_page_locators import FeedPageLocators
 from pages.feed_page import FeedPage
 from pages.main_page import MainPage
 from pages.profile_page import ProfilePage
-from locators.profile_locators import ProfileLocators
+from locators.profile_page_locators import ProfilePageLocators
 
 class TestOrderFunctional:
     def test_open_order_details_success(self, temp_user_logged_in__return_driver):
@@ -66,5 +66,4 @@ class TestOrderFunctional:
         MainPage(driver).go_to_order_feed()
         page = FeedPage(driver)
         order_number = CreateOrder.create_order(token).json()['order']['number']
-
         assert page.is_order_number_in_work(order_number, 10)
