@@ -1,7 +1,6 @@
 from pages.login_page import LoginPage
 from pages.forgot_password_page import ForgotPasswordPage
 from pages.reset_password_page import ResetPasswordPage
-from data import Urls
 import allure
 
 
