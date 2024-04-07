@@ -1,3 +1,5 @@
+import time
+
 from locators.feed_page_locators import FeedPageLocators
 from pages.base_page import BasePage
 import allure
@@ -26,19 +28,36 @@ class FeedPage(BasePage):
 
     @allure.step('Получаем общее количество заказов')
     def get_orders_common_counter(self):
-        return self.get_element_value(FeedPageLocators.COUNTER_ALL_ORDERS)
+        return self.get_element_value_using_wait(FeedPageLocators.COUNTER_ALL_ORDERS)
 
     @allure.step('Получаем количество заказов за день')
     def get_orders_daily_counter(self):
-        return self.get_element_value(FeedPageLocators.COUNTER_DAILY_ORDERS)
+        return self.get_element_value_using_wait(FeedPageLocators.COUNTER_DAILY_ORDERS)
 
-    @allure.step('Проверяем, взяли ли заказ в работу')
+    @allure.step('Проверяем, появился ли заказ в списке взятых в работу заказов')
     def is_order_number_in_work(self, order_number, counter):
+        print("Counter:", counter)
+
         if counter > 0:
-            order_number_in_work = self.get_element_value(FeedPageLocators.ORDER_IN_WORK)
-
-            if str(order_number) in order_number_in_work:
-                return True
+            order_number_in_work = self.get_element_value_using_wait(FeedPageLocators.ORDER_IN_WORK)
+            print(order_number)
+            print(order_number_in_work)
+            if order_number_in_work is not None:
+                if str(order_number) in order_number_in_work:
+                    return True
+                else:
+                    self.is_order_number_in_work(order_number, counter - 1)
             else:
-                self.is_order_number_in_work(order_number, counter-1)
+                self.is_order_number_in_work(order_number, counter - 1)
 
+
+    @allure.step('Проверяем наличие текста "Лента заказов" на странице')
+    def get_text_feed_indicator(self):
+        return self.wait_and_find_element(FeedPageLocators.TEXT_ORDER_FEED)
+
+    @allure.step('Проверяем, что открывается попап с деталями заказа')
+    def check_popup_opened_in_feed(self):
+        if len(self.find_elements(FeedPageLocators.POPUP_ORDER_OPENED)) > 0:
+            return True
+        else:
+            return False

@@ -3,10 +3,12 @@ from locators.profile_page_locators import ProfilePageLocators
 from locators.login_page_locators import LoginPageLocators
 import allure
 
+
 class ProfilePage(BasePage):
     @allure.step('Нажимаем на кнопку "История заказов" и попадаем на страницу /account/order-history')
     def go_to_order_history_page(self):
         self.click_on_element(ProfilePageLocators.BUTTON_PROFILE_ORDERS_HISTORY)
+        self.wait_and_find_element(ProfilePageLocators.LIST_OF_MY_ORDERS)
 
     @allure.step('Нажимаем на кнопку "Выход" для выхода из профиля')
     def logout(self):
@@ -27,3 +29,11 @@ class ProfilePage(BasePage):
             return True
         else:
             return False
+
+    @allure.step('Проверяем наличие кнопки "Сохранить"')
+    def get_save_profile_button(self):
+        return self.find_element(ProfilePageLocators.BUTTON_SAVE_PROFILE)
+
+    @allure.step('Проверяем, есть ли на странице блок с моими заказами')
+    def check_if_history_orders_exist(self):
+        return self.find_element(ProfilePageLocators.LIST_OF_MY_ORDERS)

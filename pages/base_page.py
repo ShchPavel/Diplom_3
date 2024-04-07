@@ -35,7 +35,19 @@ class BasePage:
     def get_orders(self, locator):
         return self.driver.find_elements(*locator)
 
-    def get_element_value(self, locator):
+    def get_element_value_using_wait(self, locator):
         self.wait_and_find_element(locator)
         value = self.driver.find_element(*locator).text
         return value
+
+    def get_current_url(self):
+        return self.driver.current_url
+
+    def find_elements(self, locator):
+        return self.driver.find_elements(*locator)
+
+    def find_element(self, locator):
+        return self.driver.find_element(*locator)
+
+    def get_element_value(self, locator):
+        return self.driver.find_element(*locator).text.strip()

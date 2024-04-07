@@ -3,7 +3,6 @@ from selenium.webdriver.common.by import By
 
 class MainPageLocators:
     BUTTON_MAKE_ORDER = By.XPATH, "//button[text()= 'Оформить заказ']"
-    TEXT_ORDER_FEED = By.XPATH, "//h1[text()='Лента заказов']"
     POPUP_DETAIL_INGREDIENT = By.CSS_SELECTOR, ".Modal_modal_opened__3ISw4 > .Modal_modal__container__Wo2l_"
     INGREDIENT_FIRST_IN_LIST = By.CSS_SELECTOR, ".BurgerIngredient_ingredient__1TVf6"
     ICON_TO_CLOSE_POPUP = By.CSS_SELECTOR, ".Modal_modal__close_modified__3V5XS"

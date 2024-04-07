@@ -1,10 +1,10 @@
 import random
 import string
-
 import requests
+import allure
 from selenium import webdriver
-
 from data import Urls, Ingredient
+
 
 
 class WebDriverFactory:
@@ -36,6 +36,7 @@ class DataGenerator:
 
 class RegisterUser:
     @staticmethod
+    @allure.step('Регистрируем юзера с рандомными данными')
     def register_new_random_user():
         payload = {
             "email": DataGenerator.generate_random_email(),
@@ -49,6 +50,7 @@ class RegisterUser:
 
 class DeleteUser:
     @staticmethod
+    @allure.step('Удаляем зарегистрированного юзера')
     def delete_user(token):
         bearer_token = f'Bearer {token}'
         headers = {"Authorization": bearer_token}
@@ -58,6 +60,7 @@ class DeleteUser:
 
 class CreateOrder:
     @staticmethod
+    @allure.step('Регистрируем заказ от имени созданного юзера')
     def create_order(token):
         bearer_token = f'Bearer {token}'
         headers = {"Authorization": bearer_token}

@@ -4,6 +4,7 @@ from locators.reset_password_page_locators import ResetPasswordPageLocators
 from helpers import DataGenerator
 import allure
 
+
 class ForgotPasswordPage(BasePage):
     @allure.step('Заполняем поле Email')
     def fill_email(self):
@@ -14,3 +15,7 @@ class ForgotPasswordPage(BasePage):
     def click_reset_button(self):
         self.click_on_element(ForgotPasswordPageLocators.BUTTON_RESET)
         self.wait_and_find_element(ResetPasswordPageLocators.BUTTON_RESET)
+
+    @allure.step('Проверяем что на странице есть текст "Восстановление пароля"')
+    def get_forgot_password_page_indicator_text(self):
+        return self.get_element_value_using_wait(ForgotPasswordPageLocators.FORGOT_PAGE_INDICATOR)

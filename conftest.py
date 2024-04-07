@@ -18,7 +18,7 @@ def temp_user_logged_in__return_driver(request):
     driver = WebDriverFactory.get_web_driver(browser_name)
     response, payload = RegisterUser.register_new_random_user()
     page = LoginPage(driver)
-    page.open_login_page()
+    page.go_to_login_page()
     page.to_login(payload['email'], payload['password'])
     yield driver
 
@@ -33,7 +33,7 @@ def temp_user_logged_in__return_driver_and_token(request):
     driver = WebDriverFactory.get_web_driver(browser_name)
     response, payload = RegisterUser.register_new_random_user()
     page = LoginPage(driver)
-    page.open_login_page()
+    page.go_to_login_page()
     page.to_login(payload['email'], payload['password'])
     token = str(response.json()['accessToken']).replace('Bearer ', '')
 
