@@ -4,17 +4,16 @@ import allure
 
 
 class FeedPage(BasePage):
-
+    @allure.step('Нажимаем на первый заказ')
     def click_first_order(self):
         self.click_on_element(FeedPageLocators.ORDER_FEED_FIRST_ORDER)
         self.wait_and_find_element(FeedPageLocators.POPUP_ORDER_OPENED)
 
-    def is_order_exist_in_feed(self, order_id):
-        pass
-
+    @allure.step('Получаем список всех заказов')
     def get_all_orders(self):
         return self.get_orders(FeedPageLocators.LIST_OF_ORDERS)
 
+    @allure.step('Проверяем, есть ли заказ в общем списке заказов')
     def is_order_in_feed_orders(self, order_locator, feed_orders_locator):
         link = None
         for _ in feed_orders_locator:
@@ -25,15 +24,15 @@ class FeedPage(BasePage):
         else:
             return False
 
+    @allure.step('Получаем общее количество заказов')
     def get_orders_common_counter(self):
         return self.get_element_value(FeedPageLocators.COUNTER_ALL_ORDERS)
 
+    @allure.step('Получаем количество заказов за день')
     def get_orders_daily_counter(self):
         return self.get_element_value(FeedPageLocators.COUNTER_DAILY_ORDERS)
 
-    # def get_order_in_work_value(self):
-    #     return self.get_element_value(FeedPageLocators.ORDER_IN_WORK)
-
+    @allure.step('Проверяем, взяли ли заказ в работу')
     def is_order_number_in_work(self, order_number, counter):
         if counter > 0:
             order_number_in_work = self.get_element_value(FeedPageLocators.ORDER_IN_WORK)

@@ -40,13 +40,13 @@ class TestMainFunctional:
         driver = temp_user_logged_in__return_driver
         page = MainPage(driver)
         page.go_to_constructor()
-        page.drag_n_drop(helpers.drag_and_drop_script, MainPageLocators.INGREDIENT_FIRST_IN_LIST, MainPageLocators.BURGER_BASKET)
+        page.drag_n_drop_first_ingredient_to_burger_constructor()
         assert int(driver.find_element(*MainPageLocators.INGREDIENT_FIRST_IN_LIST_COUNTER).text) > 0
 
     def test_order_registration_success(self, temp_user_logged_in__return_driver):
         driver = temp_user_logged_in__return_driver
         page = MainPage(driver)
         page.go_to_constructor()
-        page.drag_n_drop(helpers.drag_and_drop_script, MainPageLocators.INGREDIENT_FIRST_IN_LIST, MainPageLocators.BURGER_BASKET)
+        page.drag_n_drop_first_ingredient_to_burger_constructor()
         page.make_order()
         assert len(driver.find_elements(*MainPageLocators.TEXT_ORDER_STARTED_TO_COOKING)) > 0

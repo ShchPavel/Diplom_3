@@ -5,11 +5,12 @@ from helpers import DataGenerator
 import allure
 
 class ForgotPasswordPage(BasePage):
-
+    @allure.step('Заполняем поле Email')
     def fill_email(self):
         self.click_on_element(ForgotPasswordPageLocators.INPUT_EMAIL)
         self.set_element_input(ForgotPasswordPageLocators.INPUT_EMAIL, DataGenerator.generate_random_email())
 
+    @allure.step('Нажимаем на кнопку "Восстановить"')
     def click_reset_button(self):
         self.click_on_element(ForgotPasswordPageLocators.BUTTON_RESET)
         self.wait_and_find_element(ResetPasswordPageLocators.BUTTON_RESET)
