@@ -65,3 +65,4 @@ class FeedPage(BasePage):
     @allure.step('Рефрешим страницу')
     def refresh_feed_page(self):
         self.refresh_page()
+        self.wait_and_find_element(FeedPageLocators.COUNTER_DAILY_ORDERS)
