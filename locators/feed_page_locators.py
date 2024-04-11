@@ -7,5 +7,6 @@ class FeedPageLocators:
     LIST_OF_ORDERS = By.CSS_SELECTOR, ".OrderFeed_list__OLh59"
     COUNTER_ALL_ORDERS = By.XPATH, "//p[text()='Выполнено за все время:']/following-sibling::p"
     COUNTER_DAILY_ORDERS = By.XPATH, "//p[text()='Выполнено за сегодня:']/following-sibling::p"
-    ORDER_IN_WORK = By.CSS_SELECTOR, ".OrderFeed_orderListReady__1YFem > .text_type_digits-default"
+    ORDER_IN_WORK = By.XPATH, "//ul[contains(@class, 'OrderFeed_orderListReady')]/li[contains(@class, 'text_type_digits-default')]"
     TEXT_ORDER_FEED = By.XPATH, "//h1[text()='Лента заказов']"
+    DYNAMIC_ORDER_NUMBER_IN_FEED = By.XPATH, "//a[@href='/feed/{}']/parent::li"

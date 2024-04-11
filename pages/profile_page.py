@@ -37,3 +37,9 @@ class ProfilePage(BasePage):
     @allure.step('Проверяем, есть ли на странице блок с моими заказами')
     def check_if_history_orders_exist(self):
         return self.find_element(ProfilePageLocators.LIST_OF_MY_ORDERS)
+
+    @allure.step('Определяем локатор для блока с зарегистрированным заказом в истории заказов')
+    def get_dynamic_order_locator_in_history(self, order_id):
+        q_method, q_locator = ProfilePageLocators.DYNAMIC_ORDER_LOCATOR_IN_HISTORY
+        locator = q_method, q_locator.format(order_id)
+        return locator

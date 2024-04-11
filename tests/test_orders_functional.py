@@ -1,5 +1,4 @@
 import allure
-from selenium.webdriver.common.by import By
 from helpers import CreateOrder
 from pages.feed_page import FeedPage
 from pages.main_page import MainPage
@@ -8,8 +7,8 @@ from pages.profile_page import ProfilePage
 
 class TestOrderFunctional:
     @allure.title('Проверка, что при клике на заказ в ленте заказов открывается попап с деталями')
-    def test_open_order_details_success(self, temp_user_logged_in__return_driver):
-        driver = temp_user_logged_in__return_driver
+    def test_open_order_details_success(self, temp_user_logged_in__return_driver_and_token):
+        driver, token = temp_user_logged_in__return_driver_and_token
         page = MainPage(driver)
         page.go_to_order_feed()
         page = FeedPage(driver)
@@ -21,7 +20,8 @@ class TestOrderFunctional:
         driver, token = temp_user_logged_in__return_driver_and_token
 
         registered_order_id = CreateOrder.create_order(token).json()["order"]["_id"]
-        registered_order_locator_in_history = By.XPATH, f"//a[@href='/account/order-history/{registered_order_id}']/parent::li"
+        page = ProfilePage(driver)
+        registered_order_locator_in_history = page.get_dynamic_order_locator_in_history(registered_order_id)
 
         MainPage(driver).go_to_personal_cabinet()
 
@@ -34,7 +34,7 @@ class TestOrderFunctional:
         MainPage(driver).go_to_order_feed()
 
         page = FeedPage(driver)
-        registered_order_locator_in_feed = By.XPATH, f"//a[@href='/feed/{registered_order_id}']/parent::li"
+        registered_order_locator_in_feed = page.get_dynamic_order_locator_in_feed(registered_order_id)
         all_orders = page.get_all_orders()
         is_registered_order_in_feed_list = page.is_order_in_feed_orders(registered_order_locator_in_feed, all_orders)
         with allure.step('Убеждаемся что заказ был открыт и в ленте заказов и в истории моих заказов'):
@@ -70,4 +70,4 @@ class TestOrderFunctional:
         MainPage(driver).go_to_order_feed()
         page = FeedPage(driver)
         order_number = CreateOrder.create_order(token).json()['order']['number']
-        assert page.is_order_number_in_work(order_number, 100) is True
+        assert page.is_order_number_in_work(order_number) is True

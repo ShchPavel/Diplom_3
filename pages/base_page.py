@@ -54,3 +54,11 @@ class BasePage:
 
     def refresh_page(self):
         self.driver.refresh()
+
+    def get_local_storage_values(self):
+        return self.driver.execute_script("return window.localStorage;")
+
+    def wait_and_find_element_return_text(self, locator):
+        WebDriverWait(self.driver, 30).until(expected_conditions.visibility_of_element_located(locator))
+        element = self.driver.find_element(*locator)
+        return element.text

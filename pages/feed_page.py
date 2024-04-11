@@ -1,3 +1,5 @@
+import time
+
 from locators.feed_page_locators import FeedPageLocators
 from pages.base_page import BasePage
 import allure
@@ -33,21 +35,11 @@ class FeedPage(BasePage):
         return self.get_element_value_using_wait(FeedPageLocators.COUNTER_DAILY_ORDERS)
 
     @allure.step('Проверяем, появился ли заказ в списке взятых в работу заказов')
-    def is_order_number_in_work(self, order_number, counter):
-        print("Counter:", counter)
-
-        if counter > 0:
-            order_number_in_work = self.get_element_value_using_wait(FeedPageLocators.ORDER_IN_WORK)
-            print(order_number)
-            print(order_number_in_work)
-            if order_number_in_work is not None:
-                if str(order_number) in order_number_in_work:
-                    return True
-                else:
-                    self.is_order_number_in_work(order_number, counter - 1)
-            else:
-                self.is_order_number_in_work(order_number, counter - 1)
-
+    def is_order_number_in_work(self, order_number):
+        if str(order_number) in self.wait_and_find_element_return_text(FeedPageLocators.ORDER_IN_WORK):
+            return True
+        else:
+            return False
 
     @allure.step('Проверяем наличие текста "Лента заказов" на странице')
     def get_text_feed_indicator(self):
@@ -64,3 +56,9 @@ class FeedPage(BasePage):
     def refresh_feed_page(self):
         self.refresh_page()
         self.wait_and_find_element(FeedPageLocators.COUNTER_DAILY_ORDERS)
+
+    @allure.step('Определяем локатор для блока с зарегистрированным заказом в ленте заказов')
+    def get_dynamic_order_locator_in_feed(self, order_id):
+        q_method, q_locator = FeedPageLocators.DYNAMIC_ORDER_NUMBER_IN_FEED
+        locator = q_method, q_locator.format(order_id)
+        return locator
